@@ -1,32 +1,31 @@
 import json
 import os.path
 
-nome_arquivo = 'dados.json'
 
+class JsonStorage:
+    __nome_arquivo = 'dados.json'
 
-def lerJson():
-    if not os.path.isfile(nome_arquivo):
-        criarArquivo()
+    def lerJson(self) -> list[dict]:
+        if not os.path.isfile(self.__nome_arquivo):
+            self.criarArquivo()
 
-    arq = open(nome_arquivo, 'r', encoding='utf-8')
-    data = arq.read()
+        arq = open(self.__nome_arquivo, 'r', encoding='utf-8')
+        data = arq.read()
 
-    if len(data) == 0:
-        return []
+        if len(data) == 0:
+            return []
 
-    data = json.loads(data)
-    arq.close()
+        data = json.loads(data)
+        arq.close()
 
-    return data
+        return data
 
+    def gravarJson(self, dados: list[dict]) -> None:
+        arq = open(self.__nome_arquivo, 'w+', encoding='utf-8')
+        data = json.dumps(dados, indent=4)
+        arq.write(data)
+        arq.close()
 
-def gravarJson(dados):
-    arq = open(nome_arquivo, 'w+', encoding='utf-8')
-    data = json.dumps(dados, indent=4)
-    arq.write(data)
-    arq.close()
-
-
-def criarArquivo():
-    arq = open(nome_arquivo, 'w+', encoding='utf-8')
-    arq.close()
+    def criarArquivo(self) -> None:
+        arq = open(self.__nome_arquivo, 'w+', encoding='utf-8')
+        arq.close()

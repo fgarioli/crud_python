@@ -1,5 +1,5 @@
 from telas import *
-from persistencia import *
+from persistencia import Persistencia
 
 
 def menu():
@@ -16,32 +16,34 @@ def menu():
     return opcao
 
 
+persistencia = Persistencia()
+
 while True:
     opcao = menu()
 
     if opcao == 1:
         produto = cadastrarProduto()
-        criar(produto)
+        persistencia.criar(produto)
         exibirMsg("Produto cadastrado com sucesso!")
     elif opcao == 2:
         produto = editarProduto()
-        editar(produto)
+        persistencia.editar(produto)
         exibirMsg("Produto editado com sucesso!")
     elif opcao == 3:
         limparTela()
         id = excluirProduto()
-        excluir(id)
+        persistencia.excluir(id)
         exibirMsg("Produto excluído com sucesso!")
     elif opcao == 4:
         id = selecionarProduto()
-        produto = selecionar(id)
+        produto = persistencia.selecionar(id)
         if produto == None:
             exibirMsg("Produto não encontrado!")
         else:
             exibirProduto(produto)
             travarTela()
     elif opcao == 5:
-        produtos = selecionar_todos()
+        produtos = persistencia.selecionar_todos()
         exibirProdutos(produtos)
     elif opcao == 6:
         break

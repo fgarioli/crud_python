@@ -1,25 +1,26 @@
 import os
+from Produto import Produto
 
 
-def cadastrarProduto():
+def cadastrarProduto() -> Produto:
     limparTela()
     print("-------- Cadastro de Produto --------")
-    produto = {}
-    produto['nome'] = input('Nome: ')
-    produto['preco'] = float(input('Preço: '))
-    produto['quantidade'] = int(input('Quantidade: '))
+    produto = Produto()
+    produto.setNome(input('Nome: '))
+    produto.setPreco(float(input('Preço: ')))
+    produto.setQuantidade(int(input('Quantidade: ')))
 
     return produto
 
 
-def editarProduto():
+def editarProduto() -> Produto:
     limparTela()
     print("-------- Edição de Produto --------")
-    produto = {}
-    produto['id'] = int(input('Id: '))
-    produto['nome'] = input('Nome: ')
-    produto['preco'] = float(input('Preço: '))
-    produto['quantidade'] = int(input('Quantidade: '))
+    produto = Produto()
+    produto.setId(int(input('Id: ')))
+    produto.setNome(input('Nome: '))
+    produto.setPreco(float(input('Preço: ')))
+    produto.setQuantidade(int(input('Quantidade: ')))
 
     return produto
 
@@ -38,12 +39,12 @@ def selecionarProduto():
     return id
 
 
-def exibirProduto(produto):
+def exibirProduto(produto: Produto):
     print("-------- Produto --------")
-    print(f"Id: {produto['id']}")
-    print(f"Nome: {produto['nome']}")
-    print(f"Preço: {produto['preco']}")
-    print(f"Quantidade: {produto['quantidade']}")
+    print(f"Id: {produto.getId()}")
+    print(f"Nome: {produto.getNome()}")
+    print(f"Preço: {produto.getPreco()}")
+    print(f"Quantidade: {produto.getQuantidade()}")
 
 
 def exibirProdutos(produtos):
