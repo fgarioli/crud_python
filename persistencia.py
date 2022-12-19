@@ -8,15 +8,15 @@ class Persistencia():
     def criar(self, dado: Produto) -> Produto:
         dados = self.selecionar_todos()
         dado.setId(self.__gerarId())
-        dados.append(dado.toDict())
-        self.__storage.gravarJson(dados)
+        dados.append(dado)
+        self.__storage.gravarJson(list(map(lambda x: x.toDict(), dados)))
 
     def editar(self, dado: Produto) -> None:
         dados = self.selecionar_todos()
         for i, data in enumerate(dados):
             if data.getId() == dado.getId():
-                dados[i] = dado.toDict()
-        self.__storage.gravarJson(dados)
+                dados[i] = dado
+        self.__storage.gravarJson(list(map(lambda x: x.toDict(), dados)))
 
     def excluir(self, id: int) -> None:
         dados = self.selecionar_todos()
